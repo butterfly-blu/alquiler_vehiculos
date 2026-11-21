@@ -1,0 +1,44 @@
+.modal {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 10;
+}
+
+.modal.close {
+  top: -100vh;
+}
+
+.modal .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 40vh;
+  left: calc((100vw - 266px) / 2);
+  width: 250px;
+  padding: 16px;
+  border: 1px solid #dedddd;
+  border-radius: 16px;
+  box-shadow: 0px 0px 5px 5px #dedddd;
+  background-color: #fff;
+  transition-property: bottom;
+  transition-duration: 250ms;
+  transition-timing-function: linear;
+}
+
+.modal.close .content{
+    bottom: -40vh;
+}
+
+.modal .content div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 16px;
+}

@@ -1,0 +1,109 @@
+### ===================== Microservicio vehiculos_ms (puerto 8081) =====================
+
+### Estado del servicio
+GET http://127.0.0.1:8081/
+
+### Consultar todos los vehiculos
+GET http://127.0.0.1:8081/vehiculos
+
+### Consultar vehiculos por estado (disponible | alquilado | mantenimiento)
+GET http://127.0.0.1:8081/vehiculos?estado=disponible
+
+### Consultar un vehiculo
+GET http://127.0.0.1:8081/vehiculos/1
+
+### Consultar vehiculos disponibles en una fecha
+GET http://127.0.0.1:8081/vehiculos/disponibles/2026-12-01
+
+### Registrar un vehiculo
+POST http://127.0.0.1:8081/vehiculos
+Content-Type: application/json
+
+{
+    "marca": "Mazda",
+    "modelo": "3",
+    "anio": 2024,
+    "categoria": "Sedan",
+    "estado": "disponible"
+}
+
+### Modificar un vehiculo
+PUT http://127.0.0.1:8081/vehiculos/4
+Content-Type: application/json
+
+{
+    "marca": "Mazda",
+    "modelo": "CX-30",
+    "anio": 2024,
+    "categoria": "SUV",
+    "estado": "disponible"
+}
+
+### Borrar un vehiculo
+DELETE http://127.0.0.1:8081/vehiculos/4
+
+
+### ===================== Microservicio clientes_ms (puerto 8082) =====================
+
+### Consultar todos los clientes
+GET http://127.0.0.1:8082/clientes
+
+### Consultar un cliente
+GET http://127.0.0.1:8082/clientes/1
+
+### Registrar un cliente
+POST http://127.0.0.1:8082/clientes
+Content-Type: application/json
+
+{
+    "nombre": "Ana Perez",
+    "telefono": "3109998877",
+    "correo": "ana@test.com",
+    "numero_licencia": "LIC-2001"
+}
+
+### Modificar un cliente
+PUT http://127.0.0.1:8082/clientes/3
+Content-Type: application/json
+
+{
+    "nombre": "Ana Maria Perez",
+    "telefono": "3109998877",
+    "correo": "ana.maria@test.com",
+    "numero_licencia": "LIC-2001"
+}
+
+### Borrar un cliente
+DELETE http://127.0.0.1:8082/clientes/3
+
+
+### ===================== Microservicio reservas_ms (puerto 8083) =====================
+
+### Consultar todas las reservas
+GET http://127.0.0.1:8083/reservas
+
+### Historial de un cliente
+GET http://127.0.0.1:8083/reservas?cliente_id=1
+
+### Historial de un vehiculo
+GET http://127.0.0.1:8083/reservas?vehiculo_id=1
+
+### Consultar una reserva
+GET http://127.0.0.1:8083/reservas/1
+
+### Registrar una reserva
+POST http://127.0.0.1:8083/reservas
+Content-Type: application/json
+
+{
+    "cliente_id": 1,
+    "vehiculo_id": 1,
+    "fecha_inicio": "2026-12-01",
+    "fecha_fin": "2026-12-05"
+}
+
+### Devolver un vehiculo (reserva => completada)
+PUT http://127.0.0.1:8083/reservas/1/devolver
+
+### Cancelar una reserva (reserva => cancelada)
+PUT http://127.0.0.1:8083/reservas/1/cancelar

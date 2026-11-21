@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alquiler de Vehículos</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="stylesheet" href="css/modals.css" />
+    <link rel="stylesheet" href="css/msg.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Alquiler de Vehículos</h1>
+    </header>
+
+    <nav>
+      <button class="tab activo" data-seccion="vehiculos">Vehículos</button>
+      <button class="tab" data-seccion="clientes">Clientes</button>
+      <button class="tab" data-seccion="reservas">Reservas</button>
+      <button class="tab" data-seccion="disponibilidad">Disponibilidad</button>
+      <button class="tab" data-seccion="historial">Historial</button>
+    </nav>
+
+    <main>
+      <!-- Vehículos -->
+      <section id="vehiculos" class="seccion">
+        <h2>Vehículos</h2>
+        <form name="vehiculo-form">
+          <input type="hidden" name="id" />
+          <label>Marca <input type="text" name="marca" required /></label>
+          <label>Modelo <input type="text" name="modelo" required /></label>
+          <label>Año <input type="number" name="anio" min="1950" max="2100" required /></label>
+          <label>Categoría <input type="text" name="categoria" required /></label>
+          <label>Estado
+            <select name="estado">
+              <option value="disponible">disponible</option>
+              <option value="alquilado">alquilado</option>
+              <option value="mantenimiento">mantenimiento</option>
+            </select>
+          </label>
+          <div class="botones">
+            <button type="submit">Guardar</button>
+            <button type="reset" class="secundario">Cancelar</button>
+          </div>
+        </form>
+        <table id="vehiculos-table">
+          <thead>
+            <tr><th>ID</th><th>Marca</th><th>Modelo</th><th>Año</th><th>Categoría</th><th>Estado</th><th>Acciones</th></tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="7">No hay datos registrados...</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Clientes -->
+      <section id="clientes" class="seccion oculto">
+        <h2>Clientes</h2>
+        <form name="cliente-form">
+          <input type="hidden" name="id" />
+          <label>Nombre <input type="text" name="nombre" required /></label>
+          <label>Teléfono <input type="text" name="telefono" required /></label>
+          <label>Correo <input type="email" name="correo" required /></label>
+          <label>Número de licencia <input type="text" name="numero_licencia" required /></label>
+          <div class="botones">
+            <button type="submit">Guardar</button>
+            <button type="reset" class="secundario">Cancelar</button>
+          </div>
+        </form>
+        <table id="clientes-table">
+          <thead>
+            <tr><th>ID</th><th>Nombre</th><th>Teléfono</th><th>Correo</th><th>Licencia</th><th>Acciones</th></tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="6">No hay datos registrados...</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Reservas -->
+      <section id="reservas" class="seccion oculto">
+        <h2>Reservas</h2>
+        <form name="reserva-form">
+          <label>Cliente <select name="cliente_id" required></select></label>
+          <label>Vehículo <select name="vehiculo_id" required></select></label>
+          <label>Fecha inicio <input type="date" name="fecha_inicio" required /></label>
+          <label>Fecha fin <input type="date" name="fecha_fin" required /></label>
+          <div class="botones">
+            <button type="submit">Reservar</button>
+          </div>
+        </form>
+        <table id="reservas-table">
+          <thead>
+            <tr><th>ID</th><th>Cliente</th><th>Vehículo</th><th>Inicio</th><th>Fin</th><th>Estado</th><th>Acciones</th></tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="7">No hay datos registrados...</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Disponibilidad -->
+      <section id="disponibilidad" class="seccion oculto">
+        <h2>Disponibilidad</h2>
+        <div class="fila">
+          <label>Fecha <input type="date" id="disp-fecha" /></label>
+          <button id="disp-consultar">Consultar</button>
+        </div>
+        <table id="disponibles-table">
+          <thead>
+            <tr><th>ID</th><th>Marca</th><th>Modelo</th><th>Año</th><th>Categoría</th><th>Estado</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!-- Historial -->
+      <section id="historial" class="seccion oculto">
+        <h2>Historial</h2>
+        <div class="fila">
+          <label>Filtrar por
+            <select id="hist-tipo">
+              <option value="cliente">Cliente</option>
+              <option value="vehiculo">Vehículo</option>
+            </select>
+          </label>
+          <label>Elemento <select id="hist-elemento"></select></label>
+        </div>
+        <table id="historial-table">
+          <thead>
+            <tr><th>ID</th><th>Cliente</th><th>Vehículo</th><th>Inicio</th><th>Fin</th><th>Estado</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </main>
+
+    <div id="confirmar-modal" class="modal close">
+      <div class="content">
+        <h4 id="confirmar-modal-texto">¿Desea borrar el registro?</h4>
+        <div>
+          <button id="cancelar-modal-btn" class="secundario">Cancelar</button>
+          <button id="aceptar-modal-btn" class="peligro">Aceptar</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="msg-content" class="msg hidden">
+      <p>Datos guardados!!!</p>
+    </div>
+
+    <script src="js/components/base_components.js"></script>
+    <script src="js/components/vehiculos_components.js"></script>
+    <script src="js/components/clientes_components.js"></script>
+    <script src="js/components/reservas_components.js"></script>
+    <script src="js/services/api_services.js"></script>
+    <script src="js/services/vehiculos_services.js"></script>
+    <script src="js/services/clientes_services.js"></script>
+    <script src="js/services/reservas_services.js"></script>
+    <script src="js/alquiler.js"></script>
+    <script src="js/vehiculos.js"></script>
+    <script src="js/clientes.js"></script>
+    <script src="js/reservas.js"></script>
+    <script src="js/historial.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
